@@ -3,12 +3,12 @@ import csv
 def hawkid():
     return(["Nathan Mitchell", "njmitchell"])
 
-def import_data():
+def import_data(inFile):
     participants = []
-    with open('test_input.csv') as filename:
+    with open(inFile) as filename:
         myCSVreader = csv.reader(filename)
         for row in myCSVreader:
-            participants.append(row)
+            participants.append(float(row))
             
     return participants
 
@@ -34,14 +34,15 @@ def fight(participant1, participant2, first2attack):
             hp2=hp2-(int(participant1[3])*(attack_multiplier(participant1[1],participant2[1])))
             first2attack=2
             rounds=rounds+1
+
         elif first2attack==2:
             hp1=hp1-(int(participant2[3])*(attack_multiplier(participant2[1],participant1[1])))
             first2attack=1
             rounds=rounds+1
-    if hp1>0:
-        winner = 1
-    else:
-        winner= 2
+        if hp1>0:
+            winner = 1
+        else:
+            winner= 2
     return [winner,rounds]
 
 def tournament(participants):
